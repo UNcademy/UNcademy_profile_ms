@@ -1,0 +1,8 @@
+version: '3'
+services:
+  uncademy_profile_ms:
+    image: uncademy_profile_ms
+    build: .
+    volumes:
+      - ".:/UNcademy_profile_ms"
+    network_mode: host
