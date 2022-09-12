@@ -1,11 +1,9 @@
 package view
 
-import (
-	"UNcademy_profile_ms/models"
-)
+import model "UNcademy_profile_ms/models"
 
 type Service interface {
-	ViewService(username string) (*models.User, string)
+	ViewService(username string) (*model.User, string)
 }
 
 type service struct {
@@ -17,7 +15,7 @@ func NewViewService(repository Repository) *service {
 }
 
 // Transforma el request en el modelo que tengo definido en mi base de datos
-func (s *service) ViewService(username string) (*models.User, string) {
+func (s *service) ViewService(username string) (*model.User, string) {
 	user, errView := s.repository.ViewRepository(username)
 	return user, errView
 }

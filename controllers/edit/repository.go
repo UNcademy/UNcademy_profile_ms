@@ -25,7 +25,7 @@ func (r *repository) EditRepository(input *model.User, username string) (*model.
 
 	checkUserAccount := db.Debug().Select("*").Where("user_name = ?", username).Find(&users)
 
-	if checkUserAccount.Error != nil {
+	if checkUserAccount.RowsAffected == 0 {
 		errorCode <- "USER_NOT_FOUND_404"
 		return &users, <-errorCode
 	}

@@ -22,12 +22,12 @@ func (h *handler) ViewHandler(ctx *gin.Context) {
 
 	switch errView {
 
-	case "LOGIN_NOT_FOUND_404":
+	case "USER_NOT_FOUND_404":
 		util.APIResponse(ctx, "User not found", http.StatusNotFound, http.MethodPut, nil)
-	case "LOGIN_NOT_ACTIVE_403":
+	case "USER_NOT_ACTIVE_403":
 		util.APIResponse(ctx, "User not active", http.StatusForbidden, http.MethodPut, nil)
 	default:
-		util.APIResponse(ctx, "Changed successfully!", http.StatusOK, http.MethodPut, user)
+		util.APIResponse(ctx, "Returning user", http.StatusOK, http.MethodPut, user)
 	}
 
 }

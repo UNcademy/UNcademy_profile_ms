@@ -27,9 +27,9 @@ func (r *repository) ViewRepository(username string) (*model.User, string) {
 	users.UserName = username
 
 	//Miro si el nombre de usuario existe en la base de datos y guarda en users (estructura temporal) la informacion que esta guardada de ese usuario
-	checkUserAccount := db.Select("*").Find(&users)
+	checkUserAccount := db.Debug().Select("*").Where("user_name = ?", username).Find(&users)
 
-	if checkUserAccount.Error != nil {
+	if checkUserAccount.RowsAffected == 0 {
 		errorCode <- "USER_NOT_FOUND_404"
 		return &users, <-errorCode
 	}
@@ -39,5 +39,6 @@ func (r *repository) ViewRepository(username string) (*model.User, string) {
 		return &users, <-errorCode
 	}
 
+	errorCode <- "nil"
 	return &users, <-errorCode
 }
